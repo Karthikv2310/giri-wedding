@@ -1,13 +1,13 @@
-# Girish & Supreetha | Royal Temple Wedding Invitation Website 🌸✨
+# Girish & Supritha | Royal Temple Wedding Invitation Website 🌸✨
 
-An exact, high-fidelity replica of the **Divine Temple Cinematic Wedding Invitation** template, fully customized for **Girish & Supreetha K S**.
+An exact, high-fidelity replica of the **Divine Temple Cinematic Wedding Invitation** template, fully customized for **Girish & Supritha K S**.
 
 ---
 
 ## 📋 Customized Details
 
 - **Groom**: Girish (Son of Mr. Arun Kumar & Mrs. Sushila)
-- **Bride**: Supreetha K S (Daughter of Mr. Suresh L & Mrs. Nagarathna)
+- **Bride**: Supritha K S (Daughter of Mr. Suresh L & Mrs. Nagarathna)
 - **Wedding Date**: 10th December 2026
 - **Muhurtham Time**: 8:45 AM to 9:10 AM
 - **Event**: Wedding Ceremony (Lagna Muhurtham)
@@ -44,7 +44,7 @@ Files in this folder:
 `c:\Users\asus\OneDrive\Desktop\giri wedding\assets\template\`
 
 - **Girish (Groom)**: [groom.jpg](file:///c:/Users/asus/OneDrive/Desktop/giri%20wedding/assets/template/groom.jpg)
-- **Supreetha (Bride)**: [bride.jpg](file:///c:/Users/asus/OneDrive/Desktop/giri%20wedding/assets/template/bride.jpg)
+- **Supritha (Bride)**: [bride.jpg](file:///c:/Users/asus/OneDrive/Desktop/giri%20wedding/assets/template/bride.jpg)
 
 ---
 
@@ -55,7 +55,7 @@ Files in this folder:
    - "Tap the sacred center ring to swing the golden sanctuary gates open".
 2. **Glowing Hero Video Background**:
    - Atmospheric temple video background (`assets/videos/hero_video.mp4`).
-   - Glowing serif typography for Girish & Supreetha K S.
+   - Glowing serif typography for Girish & Supritha K S.
 3. **Floating Music Player**:
    - Authentic auspicious shehnai/instrumental wedding track (`assets/template/Wedding_Mashup_Instrumental.mp3`).
    - Floating gold button with pulsing sound-wave rings & auto-pause on tab change.
