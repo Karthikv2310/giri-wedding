@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>R Girish &amp; Supreetha | Royal Wedding Invitation</title>
+  
+  <!-- Google Fonts: English & Kannada -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Anek+Kannada:wght@400;500;600;700;800&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700&family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              DEFAULT: '#c9953a',
+              light: '#f5d6a0',
+              deep: '#8a6528',
+              accent: '#dfba73'
+            },
+            royal: {
+              bg: '#faf5f0',
+              card: '#fdfaf5',
+              text: '#6b4f2c',
+              subtext: '#8a7156',
+              maroon: '#7a1f3d'
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            cinzel: ['"Cinzel"', 'serif'],
+            cormorant: ['"Cormorant Garamond"', 'serif'],
+            poppins: ['"Poppins"', 'sans-serif'],
+            script: ['"Alex Brush"', 'cursive'],
+            vibes: ['"Great Vibes"', 'cursive'],
+            kannada: ['"Anek Kannada"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Animations and Royal Styling */
+    html, body {
+      scroll-behavior: smooth !important;
+      background-color: #faf5f0;
+      color: #6b4f2c;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      transition: font-family 0.2s ease;
+    }
+
+    /* Kannada Typography Polish */
+    body.lang-kn {
+      font-family: 'Anek Kannada', 'Poppins', sans-serif !important;
+    }
+    body.lang-kn .font-serif {
+      font-family: 'Anek Kannada', 'Playfair Display', serif !important;
+      letter-spacing: 0.02em !important;
+    }
+    body.lang-kn .font-cinzel {
+      font-family: 'Anek Kannada', 'Cinzel', serif !important;
+    }
+
+    ::selection {
+      background-color: #c9953a;
+      color: #0d0907;
+    }
+
+    /* Rotating Mandala */
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .spin-mandala {
+      animation: spinSlow 35s linear infinite;
+    }
+    .spin-mandala-reverse {
+      animation: spinSlow 40s linear infinite reverse;
+    }
+
+    /* Floating Petals / Rain */
+    .particle {
+      position: absolute;
+      pointer-events: none;
+      border-radius: 50%;
+      z-index: 15;
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(-20px) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+      20% { opacity: 0.8; }
+      80% { opacity: 0.8; }
+      100% {
+        transform: translateY(105vh) rotate(360deg) scale(1.1);
+        opacity: 0;
+      }
+    }
+
+    /* Sound Wave Pulse for Music Button */
+    @keyframes pulseRing1 {
+      0% { transform: scale(1); opacity: 0.7; }
+      100% { transform: scale(1.8); opacity: 0; }
+    }
+    @keyframes pulseRing2 {
+      0% { transform: scale(1); opacity: 0.5; }
+      100% { transform: scale(2.4); opacity: 0; }
+    }
+    .pulse-ring-1 {
+      animation: pulseRing1 2s ease-out infinite;
+    }
+    .pulse-ring-2 {
+      animation: pulseRing2 2.4s ease-out infinite 0.5s;
+    }
+
+    /* Intro Overlay Transition */
+    #introOverlay {
+      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s;
+    }
+    #introOverlay.hidden-intro {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* Mouse scroll animation */
+    @keyframes mouseScroll {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(10px); opacity: 0; }
+    }
+    .mouse-wheel {
+      animation: mouseScroll 1.6s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen flex justify-center selection:bg-[#c9953a] selection:text-white">
+
+  <!-- ============================================================== -->
+  <!-- 0. FLOATING LANGUAGE SWITCH BUTTON (EN <-> KAN) -->
+  <!-- ============================================================== -->
+  <button id="langToggleBtn" aria-label="Switch Language" class="fixed top-4 right-4 z-[9999] px-3.5 py-1.5 rounded-full bg-black/65 hover:bg-black/85 backdrop-blur-md border border-[#c9953a] text-white text-xs font-bold shadow-[0_4px_20px_rgba(201,149,58,0.45)] flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer">
+    <svg class="w-4 h-4 text-[#f5d6a0] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+    </svg>
+    <span id="langBtnText" class="tracking-wide">ಕನ್ನಡ</span>
+  </button>
+
+
+  <!-- ============================================================== -->
+  <!-- 1. CINEMATIC TEMPLE DOORS INTRO (Tap To Open) -->
+  <!-- ============================================================== -->
+  <div id="introOverlay" class="fixed inset-0 z-[100] w-full h-full bg-[#120a06] flex items-center justify-center overflow-hidden cursor-pointer select-none">
+    <!-- Intro Video Gates (Plays Sanctuary Doors Swing Open) -->
+    <video id="introVideo" playsinline preload="auto" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none z-0">
+      <source src="assets/videos/temple_intro.mp4" type="video/mp4" />
+    </video>
+    
+    <!-- Dark Vignette Overlay -->
+    <div id="introVignette" class="absolute inset-0 bg-black/40 z-10 pointer-events-none transition-opacity duration-700"></div>
+
+    <!-- Center Interactive Ring & Tap Prompt -->
+    <div id="introCenterUI" class="relative z-20 flex flex-col items-center justify-center text-center px-6 max-w-[360px] transition-all duration-700">
+      <div class="w-16 h-16 sm:w-20 sm:h-20 mb-6 rounded-full border-2 border-[#dfba73]/80 bg-black/40 backdrop-blur-md flex items-center justify-center p-3 shadow-[0_0_35px_rgba(201,149,58,0.7)] group-hover:scale-110 transition-transform">
+        <svg class="w-8 h-8 sm:w-10 sm:h-10 text-[#f5d6a0] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 9l-6 6m0-6l6 6m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v2m0 12v2m-8-8h2m12 0h2" />
+        </svg>
+      </div>
+      
+      <p data-i18n="introDivine" class="font-cinzel text-xs sm:text-sm tracking-[0.35em] uppercase text-[#f5d6a0] mb-2 font-semibold">With Divine Blessings</p>
+      <h1 data-i18n="introCouple" class="font-serif italic text-3xl sm:text-4xl text-white font-bold drop-shadow-lg mb-3">R Girish &amp; Supreetha</h1>
+      <p data-i18n="introTapText" class="text-[11px] text-[#e0cfbe] font-light tracking-widest max-w-[280px] mb-8 leading-relaxed">
+        Tap the sacred center ring to swing the golden sanctuary gates open
+      </p>
+
+      <button id="openBtn" data-i18n="introOpenBtn" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-[#c9953a] via-[#e2b868] to-[#c9953a] text-black font-cinzel text-xs font-bold tracking-[0.3em] uppercase shadow-[0_8px_25px_rgba(201,149,58,0.6)] hover:scale-105 active:scale-95 transition-all">
+        OPEN INVITATION
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ============================================================== -->
+  <!-- 2. MAIN MOBILE-FIRST INVITATION CONTAINER (Max 430px) -->
+  <!-- ============================================================== -->
+  <main class="relative w-full max-w-[430px] min-h-screen bg-[#fdfaf5] text-[#6b4f2c] shadow-[0_0_60px_rgba(139,115,85,0.12)] sm:border-x sm:border-[#c9953a]/25 overflow-x-hidden z-10 flex flex-col pb-24">
+
+    <!-- Floating Falling Particle Container (Petals / Sparkles) -->
+    <div id="particleContainer" class="fixed inset-0 max-w-[430px] mx-auto pointer-events-none z-20 overflow-hidden"></div>
+
+    <!-- ============================================================== -->
+    <!-- HERO SECTION (Crystal Clear Banana Tree & Temple Mandap) -->
+    <!-- ============================================================== -->
+    <section class="relative min-h-screen w-full flex flex-col items-center justify-between px-5 pb-8 text-center select-none overflow-hidden">
+      <!-- Background Video (100% Clear, No Washout) -->
+      <div class="absolute inset-0 w-full h-full z-0 overflow-hidden">
+        <video id="heroVideo" autoplay loop muted playsinline class="w-full h-full object-cover scale-100">
+          <source src="assets/videos/hero_video.mp4" type="video/mp4" />
+        </video>
+        <!-- Very light top shade to preserve status bar without obscuring tree or temple -->
+        <div class="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-black/10 to-transparent pointer-events-none"></div>
+      </div>
+
+      <!-- Couple Names & Details (Positioned in open space at mt-[15vh]) -->
+      <div class="relative z-10 w-full flex flex-col items-center mt-[15vh]">
+        <span data-i18n="heroTheWeddingOf" class="text-[10px] sm:text-[11px] tracking-[0.35em] uppercase font-bold text-[#8a6528] mb-1.5 drop-shadow-[0_1px_2px_rgba(255,255,255,0.9)]">
+          The Wedding Of
+        </span>
+        <h1 data-i18n="heroGirish" class="font-serif italic font-bold leading-[1.05] text-[44px] sm:text-[50px] text-[#422915] drop-shadow-[0_2px_4px_rgba(255,255,255,0.9)]">
+          R Girish
+        </h1>
+        <div class="flex items-center justify-center my-0.5">
+          <span class="font-script text-2xl sm:text-3xl text-[#c9953a] drop-shadow-sm">&amp;</span>
+        </div>
+        <h1 data-i18n="heroSupreetha" class="font-serif italic font-bold leading-[1.05] text-[38px] sm:text-[44px] text-[#422915] drop-shadow-[0_2px_4px_rgba(255,255,255,0.9)]">
+          Supreetha K S
+        </h1>
+
+        <!-- Date & Venue Preview -->
+        <div class="mt-4 flex flex-col items-center gap-1.5">
+          <p data-i18n="heroVenue" class="text-[11px] sm:text-[12px] tracking-[0.25em] uppercase font-extrabold text-[#5a3a10] bg-white/50 backdrop-blur-[2px] px-4 py-1 rounded-full shadow-sm">
+            Lions Seva Mandhira, Thyagaraja Road
+          </p>
+          <p data-i18n="heroDate" class="text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-extrabold text-[#5a3a10] bg-white/50 backdrop-blur-[2px] px-4 py-1 rounded-full shadow-sm">
+            Koppa • 10th December 2026
+          </p>
+          <p data-i18n="heroMuhurtham" class="text-[10px] sm:text-[11px] tracking-[0.2em] uppercase font-bold text-[#5a3a10] bg-white/50 backdrop-blur-[2px] px-4 py-1 rounded-full shadow-sm mt-0.5">
+            Muhurtham: 8:45 AM - 9:10 AM
+          </p>
+        </div>
+      </div>
+
+      <!-- Scroll Down Indicator -->
+      <a href="#couple" class="relative z-10 flex flex-col items-center gap-1.5 mt-auto select-none cursor-pointer hover:opacity-80 transition-opacity">
+        <div class="w-4 h-7 rounded-full border-2 border-[#8a6528] flex items-start justify-center p-0.5 bg-white/60 backdrop-blur-sm shadow-xs">
+          <div class="w-1 h-2 rounded-full bg-[#8a6528] mouse-wheel"></div>
+        </div>
+        <span data-i18n="heroScroll" class="text-[8px] tracking-[0.25em] uppercase font-bold text-[#8a6528] drop-shadow-xs">Scroll to Explore</span>
+      </a>
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- 3. MEET THE COUPLE -->
+    <!-- ============================================================== -->
+    <section id="couple" class="relative z-10 px-6 py-16 flex flex-col items-center text-center">
+      <!-- Section Header -->
+      <span data-i18n="coupleSectionSub" class="text-[10px] tracking-[0.4em] uppercase font-bold text-[#c9953a]">Beginning of Forever</span>
+      <h2 data-i18n="coupleSectionTitle" class="font-serif italic text-4xl mt-2 text-[#52381b] font-bold">Meet the Couple</h2>
+      <div class="w-16 h-0.5 bg-[#c9953a] my-4 opacity-60"></div>
+
+      <!-- Groom Card -->
+      <div class="relative w-full max-w-[340px] mt-8 flex flex-col items-center">
+        <!-- Rotating Mandala Background -->
+        <img src="assets/template/round-mondal.png" alt="" class="absolute -top-14 -right-12 w-48 h-48 opacity-30 spin-mandala pointer-events-none z-0 mix-blend-multiply" />
+        
+        <!-- Framed Groom Photo -->
+        <div class="relative w-[220px] h-[300px] bg-[#fdfcfb] border-[8px] border-white rounded-tl-[40px] rounded-br-[40px] overflow-hidden shadow-[0_12px_32px_rgba(139,115,85,0.2)] mb-5 z-10">
+          <img src="assets/template/groom.jpg" alt="R Girish" class="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700" />
+        </div>
+
+        <div class="relative z-10 flex flex-col items-center">
+          <span data-i18n="groomTitle" class="text-[10px] tracking-[0.3em] uppercase font-bold text-[#c9953a]">The Groom</span>
+          <h3 data-i18n="groomName" class="font-serif italic text-2xl font-bold text-[#52381b] mt-1">R Girish</h3>
+          <p data-i18n-html="groomParents" class="text-xs text-[#8a7156] mt-1.5 max-w-[280px] leading-relaxed">
+            Son of <strong>Mr. Arun Kumar</strong> &amp; <strong>Mrs. Sushila</strong>
+          </p>
+        </div>
+      </div>
+
+      <!-- Sacred Kalash / Divider Motif -->
+      <div class="my-10 flex items-center justify-center gap-4">
+        <span class="w-14 h-[1px] bg-[#c9953a]/40"></span>
+        <img src="assets/template/temple-sacred-kalash.png" alt="Sacred Kalash" class="w-12 h-auto drop-shadow-sm" />
+        <span class="w-14 h-[1px] bg-[#c9953a]/40"></span>
+      </div>
+
+      <!-- Bride Card -->
+      <div class="relative w-full max-w-[340px] flex flex-col items-center">
+        <!-- Rotating Mandala Background -->
+        <img src="assets/template/round-mondal.png" alt="" class="absolute -top-14 -left-12 w-48 h-48 opacity-30 spin-mandala-reverse pointer-events-none z-0 mix-blend-multiply" />
+        
+        <!-- Framed Bride Photo -->
+        <div class="relative w-[220px] h-[300px] bg-[#fdfcfb] border-[8px] border-white rounded-tr-[40px] rounded-bl-[40px] overflow-hidden shadow-[0_12px_32px_rgba(139,115,85,0.2)] mb-5 z-10">
+          <img src="assets/template/bride.jpg" alt="Supreetha K S" class="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700" />
+        </div>
+
+        <div class="relative z-10 flex flex-col items-center">
+          <span data-i18n="brideTitle" class="text-[10px] tracking-[0.3em] uppercase font-bold text-[#c9953a]">The Bride</span>
+          <h3 data-i18n="brideName" class="font-serif italic text-2xl font-bold text-[#52381b] mt-1">Supreetha K S</h3>
+          <p data-i18n-html="brideParents" class="text-xs text-[#8a7156] mt-1.5 max-w-[280px] leading-relaxed">
+            Daughter of <strong>Mr. Suresh L</strong> &amp; <strong>Mrs. Nagarathna</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- 4. COUNTDOWN TIMER -->
+    <!-- ============================================================== -->
+    <section class="relative z-10 mx-6 py-10 px-6 rounded-3xl bg-gradient-to-b from-[#ebd8c3]/40 via-[#fdfaf5] to-[#ebd8c3]/40 border border-[#ebd8c3] text-center shadow-[0_10px_30px_rgba(201,149,58,0.1)]">
+      <span data-i18n="countdownSub" class="text-[10px] tracking-[0.35em] uppercase font-bold text-[#c9953a]">Counting Down The Days</span>
+      <h3 data-i18n="countdownTitle" class="font-serif italic text-2xl font-bold text-[#52381b] mt-1 mb-2">Until The Auspicious Muhurtham</h3>
+      <p data-i18n="countdownDate" class="text-[11px] font-medium text-[#8a7156] mb-6">10th December 2026 • 8:45 AM - 9:10 AM</p>
+
+      <div class="grid grid-cols-4 gap-2">
+        <div class="flex flex-col items-center p-3 rounded-2xl bg-white/80 border border-[#ebd8c3] shadow-sm">
+          <span id="days" class="font-serif text-2xl font-bold text-[#c9953a]">00</span>
+          <span data-i18n="daysLabel" class="text-[9px] tracking-wider uppercase font-semibold text-[#8a7156] mt-1">Days</span>
+        </div>
+        <div class="flex flex-col items-center p-3 rounded-2xl bg-white/80 border border-[#ebd8c3] shadow-sm">
+          <span id="hours" class="font-serif text-2xl font-bold text-[#c9953a]">00</span>
+          <span data-i18n="hoursLabel" class="text-[9px] tracking-wider uppercase font-semibold text-[#8a7156] mt-1">Hours</span>
+        </div>
+        <div class="flex flex-col items-center p-3 rounded-2xl bg-white/80 border border-[#ebd8c3] shadow-sm">
+          <span id="minutes" class="font-serif text-2xl font-bold text-[#c9953a]">00</span>
+          <span data-i18n="minsLabel" class="text-[9px] tracking-wider uppercase font-semibold text-[#8a7156] mt-1">Mins</span>
+        </div>
+        <div class="flex flex-col items-center p-3 rounded-2xl bg-white/80 border border-[#ebd8c3] shadow-sm">
+          <span id="seconds" class="font-serif text-2xl font-bold text-[#c9953a]">00</span>
+          <span data-i18n="secsLabel" class="text-[9px] tracking-wider uppercase font-semibold text-[#8a7156] mt-1">Secs</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- 5. WEDDING CEREMONY (ONLY WEDDING EVENT AS REQUESTED) -->
+    <!-- ============================================================== -->
+    <section class="relative z-10 px-6 py-16 flex flex-col items-center text-center">
+      <span data-i18n="eventsSub" class="text-[10px] tracking-[0.4em] uppercase font-bold text-[#c9953a]">The Sacred Union</span>
+      <h2 data-i18n="eventsTitle" class="font-serif italic text-4xl mt-2 text-[#52381b] font-bold">Wedding Ceremony</h2>
+      <div class="w-16 h-0.5 bg-[#c9953a] my-4 opacity-60"></div>
+
+      <div class="w-full max-w-[360px] mt-6">
+        
+        <!-- Main Wedding Card -->
+        <div class="group relative p-6 rounded-3xl bg-white border-2 border-[#c9953a] shadow-[0_12px_35px_rgba(201,149,58,0.18)] text-left">
+          <div class="flex items-center justify-between mb-4 border-b border-[#ebd8c3]/80 pb-3">
+            <span data-i18n="ceremonyBadge" class="text-[10px] font-bold uppercase tracking-widest text-white bg-gradient-to-r from-[#c9953a] to-[#8a6528] px-3.5 py-1.5 rounded-full shadow-sm">
+              Lagna Muhurtham
+            </span>
+            <span data-i18n="ceremonyDate" class="text-xs font-bold text-[#8a6528]">Thursday, 10 Dec 2026</span>
+          </div>
+
+          <div class="flex items-center gap-3 mb-4">
+            <img src="assets/template/diya.png" alt="Auspicious Diya" class="w-9 h-auto shrink-0" />
+            <div>
+              <h4 data-i18n="ceremonyHeading" class="font-serif italic text-2xl font-bold text-[#52381b]">Wedding Muhurtham</h4>
+              <p data-i18n="ceremonyTime" class="text-xs font-semibold text-[#c9953a] mt-0.5">8:45 AM to 9:10 AM</p>
+            </div>
+          </div>
+
+          <p data-i18n="ceremonyDesc" class="text-xs text-[#8a7156] leading-relaxed mb-5">
+            We cordially invite you and your family to grace the auspicious occasion of our wedding ceremony and shower your warm blessings upon the newly wedded couple.
+          </p>
+
+          <div class="pt-4 border-t border-[#ebd8c3]/60 flex flex-col gap-3">
+            <div>
+              <span data-i18n="venueLabel" class="text-[10px] uppercase tracking-widest font-bold text-[#c9953a] block">Venue</span>
+              <p data-i18n="venueName" class="text-sm font-bold text-[#52381b]">Lions Seva Mandhira</p>
+              <p data-i18n="venueAddress" class="text-xs text-[#8a7156]">Thyagaraja Road, Koppa</p>
+            </div>
+
+            <!-- Google Maps Button -->
+            <a href="https://www.google.com/maps/search/?api=1&query=Lions+Seva+Mandhira+Thyagaraja+Road+Koppa" target="_blank" rel="noopener noreferrer" class="w-full py-3 rounded-xl bg-gradient-to-r from-[#c9953a] via-[#e2b868] to-[#c9953a] text-black text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:scale-[1.02] active:scale-98 transition-all">
+              <svg class="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <span data-i18n="mapsBtn">View Venue on Google Maps</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- 6. OUR LOVE GALLERY (CAROUSEL / SLIDER) -->
+    <!-- ============================================================== -->
+    <section class="relative z-10 px-6 py-16 flex flex-col items-center text-center overflow-hidden bg-[#faf6f0] border-t border-[#ebd8c3]/60">
+      <!-- Luxury Background Arch Motif -->
+      <img src="assets/template/gallery-luxury-bg.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none select-none z-0 mix-blend-multiply" />
+
+      <!-- Section Title & Heart Motif (Matching Uploaded Screenshot) -->
+      <div class="relative z-10 flex flex-col items-center mb-6">
+        <h2 data-i18n="galleryTitle" class="font-serif italic text-3xl sm:text-4xl text-[#52381b] font-bold">Our Love Gallery</h2>
+        <div class="flex items-center justify-center gap-2 mt-2 opacity-70">
+          <span class="w-10 h-[1px] bg-[#c9953a]"></span>
+          <svg class="w-3.5 h-3.5 text-[#c9953a] fill-current" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+          <span class="w-10 h-[1px] bg-[#c9953a]"></span>
+        </div>
+      </div>
+
+      <!-- Carousel Container -->
+      <div class="relative z-10 w-full max-w-[340px] flex flex-col items-center">
+        <!-- Main Card Frame (Matching Screenshot) -->
+        <div class="relative w-full aspect-[4/5] rounded-[30px] overflow-hidden border-[3px] border-white shadow-[0_15px_40px_rgba(139,115,85,0.22)] bg-[#fdfcfb]">
+          <img id="galleryImage" src="assets/gallery/photo1.jpg" alt="Gallery Photo" class="w-full h-full object-cover object-center transition-opacity duration-300" />
+          
+          <!-- Previous Button -->
+          <button id="galleryPrevBtn" aria-label="Previous photo" class="absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/95 hover:bg-white text-[#6b4f2c] shadow-lg flex items-center justify-center border border-[#ebd8c3]/80 transition-all hover:scale-105 active:scale-95 cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" /></svg>
+          </button>
+
+          <!-- Next Button -->
+          <button id="galleryNextBtn" aria-label="Next photo" class="absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/95 hover:bg-white text-[#6b4f2c] shadow-lg flex items-center justify-center border border-[#ebd8c3]/80 transition-all hover:scale-105 active:scale-95 cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </div>
+
+        <!-- Dot Indicators -->
+        <div id="galleryDots" class="flex items-center justify-center gap-2 mt-4"></div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- 7. GIFT REGISTRY & WISHING WELL -->
+    <!-- ============================================================== -->
+    <section class="relative z-10 mx-6 my-16 p-6 rounded-3xl bg-white/95 border border-[#ebd8c3] text-center shadow-[0_10px_35px_rgba(201,149,58,0.12)]">
+      <img src="assets/template/temple-gift-chest.png" alt="Gift Chest" class="w-14 h-auto mx-auto mb-3" />
+      <span data-i18n="registrySub" class="text-[10px] tracking-[0.35em] uppercase font-bold text-[#c9953a]">Blessings &amp; Wishes</span>
+      <h3 data-i18n="registryTitle" class="font-serif italic text-2xl font-bold text-[#52381b] mt-1 mb-2">With Warm Wishes</h3>
+      <p data-i18n="registryDesc" class="text-xs text-[#8a7156] leading-relaxed max-w-[300px] mx-auto">
+        Your gracious presence and heartfelt blessings on our auspicious day are the greatest gift to us and our families.
+      </p>
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- 8. INTERACTIVE RSVP & WHATSAPP CONFIRMATION -->
+    <!-- ============================================================== -->
+    <section class="relative z-10 px-6 py-16 bg-[#fcf9f5] border-t border-[#ebd8c3]/60 flex flex-col items-center text-center">
+      <span data-i18n="rsvpSub" class="text-[10px] tracking-[0.4em] uppercase font-bold text-[#c9953a]">Your Presence is a Blessing</span>
+      <h2 data-i18n="rsvpTitle" class="font-serif italic text-3xl font-bold text-[#52381b] mt-1">RSVP &amp; Blessings</h2>
+      <p data-i18n="rsvpContact" class="text-[11px] tracking-wider text-[#8a7156] mt-2 bg-[#ebd8c3]/30 px-4 py-1 rounded-full border border-[#c9953a]/20">
+        Contact: +91 77605 42415
+      </p>
+
+      <!-- RSVP Form -->
+      <form id="rsvpForm" class="w-full max-w-[340px] mt-8 flex flex-col gap-4 text-left">
+        <div>
+          <label data-i18n="labelName" class="text-[10px] font-bold uppercase tracking-widest text-[#c9953a] block mb-1">Your Full Name</label>
+          <input type="text" id="guestName" required placeholder="e.g. Ramesh &amp; Family" class="w-full px-4 py-3 rounded-xl border border-[#e6d6c3] bg-white text-xs text-[#6b4f2c] focus:outline-none focus:border-[#c9953a]" />
+        </div>
+
+        <div>
+          <label data-i18n="labelPhone" class="text-[10px] font-bold uppercase tracking-widest text-[#c9953a] block mb-1">Mobile Number</label>
+          <input type="tel" id="guestPhone" required placeholder="+91 98765 43210" class="w-full px-4 py-3 rounded-xl border border-[#e6d6c3] bg-white text-xs text-[#6b4f2c] focus:outline-none focus:border-[#c9953a]" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label data-i18n="labelAttend" class="text-[10px] font-bold uppercase tracking-widest text-[#c9953a] block mb-1">Will You Attend?</label>
+            <select id="attendance" class="w-full px-3 py-3 rounded-xl border border-[#e6d6c3] bg-white text-xs text-[#6b4f2c] focus:outline-none focus:border-[#c9953a]">
+              <option data-i18n="attendYes" value="Joyfully Attending">Joyfully Attending</option>
+              <option data-i18n="attendNo" value="Declines with Regrets">Declines with Regrets</option>
+            </select>
+          </div>
+          <div>
+            <label data-i18n="labelCount" class="text-[10px] font-bold uppercase tracking-widest text-[#c9953a] block mb-1">Guests Count</label>
+            <select id="guestCount" class="w-full px-3 py-3 rounded-xl border border-[#e6d6c3] bg-white text-xs text-[#6b4f2c] focus:outline-none focus:border-[#c9953a]">
+              <option data-i18n="count1" value="1 Guest">1 Guest</option>
+              <option data-i18n="count2" value="2 Guests">2 Guests</option>
+              <option data-i18n="count3" value="3 Guests">3 Guests</option>
+              <option data-i18n="count4" value="4+ Family">4+ Family</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label data-i18n="labelBlessing" class="text-[10px] font-bold uppercase tracking-widest text-[#c9953a] block mb-1">Heartfelt Blessing Message</label>
+          <textarea id="guestBlessing" rows="3" placeholder="Write your warm wishes for R Girish &amp; Supreetha..." class="w-full px-4 py-3 rounded-xl border border-[#e6d6c3] bg-white text-xs text-[#6b4f2c] focus:outline-none focus:border-[#c9953a]"></textarea>
+        </div>
+
+        <!-- Buttons: Submit & Send via WhatsApp -->
+        <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#c9953a] to-[#8a6528] text-white text-xs font-bold uppercase tracking-widest shadow-md hover:opacity-95 active:scale-98 transition-all flex items-center justify-center gap-2">
+          <span data-i18n="submitRsvp">✨ Send Blessings &amp; RSVP</span>
+        </button>
+
+        <button type="button" id="whatsappRsvpBtn" class="w-full py-3.5 rounded-xl bg-[#16a34a] hover:bg-[#15803d] text-white text-xs font-bold uppercase tracking-widest shadow-md hover:scale-[1.01] active:scale-98 transition-all flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 16 16"><path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"></path></svg>
+          <span data-i18n="whatsappBtn">Send via WhatsApp (+91 77605 42415)</span>
+        </button>
+      </form>
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- 9. GUEST BLESSINGS WALL -->
+    <!-- ============================================================== -->
+    <section class="relative z-10 px-6 py-12 flex flex-col items-center text-center">
+      <div class="flex items-center gap-2 mb-4">
+        <svg class="w-5 h-5 text-[#c9953a]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <h3 data-i18n="wishesTitle" class="font-serif italic text-2xl font-bold text-[#52381b]">Wishes &amp; Blessings</h3>
+      </div>
+
+      <div id="blessingsWall" class="w-full max-w-[340px] flex flex-col gap-3">
+        <div class="p-4 rounded-2xl bg-white border border-[#ebd8c3] text-left shadow-sm">
+          <div class="flex items-center justify-between mb-1.5">
+            <span data-i18n="wishesSampleName" class="font-bold text-xs text-[#52381b]">Family &amp; Well-wishers</span>
+            <span data-i18n="wishesSampleBadge" class="text-[9px] uppercase font-bold text-[#c9953a] tracking-wider">Auspicious</span>
+          </div>
+          <p data-i18n="wishesSampleMsg" class="text-xs text-[#8a7156] italic pl-2.5 border-l-2 border-[#c9953a]">
+            "Wishing R Girish &amp; Supreetha a lifetime of happiness, togetherness, and divine blessings on your wedding day!"
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================== -->
+    <!-- 10. FOOTER & THANK YOU -->
+    <!-- ============================================================== -->
+    <footer class="relative z-10 px-6 pt-12 pb-8 text-center flex flex-col items-center">
+      <img src="assets/template/bottom-temple.png" alt="Temple Motif" class="w-28 h-auto mb-4 opacity-80" />
+      <span data-i18n="footerSub" class="text-[10px] tracking-[0.4em] uppercase font-bold text-[#c9953a]">With Gratitude</span>
+      <h3 data-i18n="footerTitle" class="font-serif italic text-3xl font-bold text-[#52381b] mt-1 mb-3">Thank You</h3>
+      <p data-i18n="footerDesc" class="text-xs text-[#8a7156] max-w-[280px] leading-relaxed mb-6">
+        It is our greatest honor to celebrate our wedding with your divine presence and warm blessings.
+      </p>
+
+      <div data-i18n="footerCouple" class="font-script text-2xl text-[#c9953a] mb-2">
+        R Girish &amp; Supreetha
+      </div>
+      <p data-i18n="footerVenue" class="text-[11px] font-semibold text-[#8a6528] mb-8">
+        Lions Seva Mandhira, Thyagaraja Road, Koppa
+      </p>
+
+      <div class="w-full pt-4 border-t border-[#ebd8c3]/60 flex flex-col items-center text-[10px] text-[#a0856c]">
+        <p data-i18n="footerMadeWith">Made with ❤️ for R Girish &amp; Supreetha's Wedding</p>
+      </div>
+    </footer>
+
+  </main>
+
+
+  <!-- ============================================================== -->
+  <!-- 11. FLOATING BACKGROUND MUSIC PLAYER BUTTON -->
+  <!-- ============================================================== -->
+  <audio id="bgAudio" loop preload="auto">
+    <source src="assets/template/Wedding_Mashup_Instrumental.mp3" type="audio/mp3" />
+  </audio>
+
+  <button id="musicToggleBtn" aria-label="Toggle music" class="fixed bottom-6 right-6 z-[99] group cursor-pointer focus:outline-none select-none">
+    <!-- Sound Waves Pulses -->
+    <span class="pulse-ring-1 absolute inset-0 rounded-full bg-[#c9953a]/40"></span>
+    <span class="pulse-ring-2 absolute inset-0 rounded-full bg-[#c9953a]/25"></span>
+
+    <!-- Golden Circle Button -->
+    <span class="relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-r from-[#dfba73] to-[#c9953a] text-white shadow-[0_8px_25px_rgba(201,149,58,0.45)] border border-white/30 transition-transform group-hover:scale-105 active:scale-95">
+      <!-- Music Note Icon -->
+      <svg id="musicIconPlaying" class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-2c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+      </svg>
+      <svg id="musicIconPaused" class="hidden w-5 h-5 sm:w-6 sm:h-6 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+      </svg>
+    </span>
+  </button>
+
+
+  <!-- ============================================================== -->
+  <!-- JAVASCRIPT CONTROLLER: AUDIO, COUNTDOWN, GALLERY, & MULTILINGUAL -->
+  <!-- ============================================================== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Multilingual Translation Dictionary
+      const translations = {
+        en: {
+          langBtn: "ಕನ್ನಡ",
+          introDivine: "With Divine Blessings",
+          introCouple: "R Girish & Supreetha",
+          introTapText: "Tap the sacred center ring to swing the golden sanctuary gates open",
+          introOpenBtn: "OPEN INVITATION",
+          
+          heroTheWeddingOf: "The Wedding Of",
+          heroGirish: "R Girish",
+          heroSupreetha: "Supreetha K S",
+          heroVenue: "Lions Seva Mandhira, Thyagaraja Road",
+          heroDate: "Koppa • 10th December 2026",
+          heroMuhurtham: "Muhurtham: 8:45 AM - 9:10 AM",
+          heroScroll: "Scroll to Explore",
+          
+          coupleSectionSub: "Beginning of Forever",
+          coupleSectionTitle: "Meet the Couple",
+          groomTitle: "The Groom",
+          groomName: "R Girish",
+          groomParents: "Son of <strong>Mr. Arun Kumar</strong> & <strong>Mrs. Sushila</strong>",
+          brideTitle: "The Bride",
+          brideName: "Supreetha K S",
+          brideParents: "Daughter of <strong>Mr. Suresh L</strong> & <strong>Mrs. Nagarathna</strong>",
+          
+          countdownSub: "Counting Down The Days",
+          countdownTitle: "Until The Auspicious Muhurtham",
+          countdownDate: "10th December 2026 • 8:45 AM - 9:10 AM",
+          daysLabel: "Days",
+          hoursLabel: "Hours",
+          minsLabel: "Mins",
+          secsLabel: "Secs",
+          
+          eventsSub: "The Sacred Union",
+          eventsTitle: "Wedding Ceremony",
+          ceremonyBadge: "Lagna Muhurtham",
+          ceremonyDate: "Thursday, 10 Dec 2026",
+          ceremonyHeading: "Wedding Muhurtham",
+          ceremonyTime: "8:45 AM to 9:10 AM",
+          ceremonyDesc: "We cordially invite you and your family to grace the auspicious occasion of our wedding ceremony and shower your warm blessings upon the newly wedded couple.",
+          venueLabel: "Venue",
+          venueName: "Lions Seva Mandhira",
+          venueAddress: "Thyagaraja Road, Koppa",
+          mapsBtn: "View Venue on Google Maps",
+          
+          galleryTitle: "Our Love Gallery",
+          
+          registrySub: "Blessings & Wishes",
+          registryTitle: "With Warm Wishes",
+          registryDesc: "Your gracious presence and heartfelt blessings on our auspicious day are the greatest gift to us and our families.",
+          
+          rsvpSub: "Your Presence is a Blessing",
+          rsvpTitle: "RSVP & Blessings",
+          rsvpContact: "Contact: +91 77605 42415",
+          labelName: "Your Full Name",
+          placeholderName: "e.g. Ramesh & Family",
+          labelPhone: "Mobile Number",
+          placeholderPhone: "+91 98765 43210",
+          labelAttend: "Will You Attend?",
+          attendYes: "Joyfully Attending",
+          attendNo: "Declines with Regrets",
+          labelCount: "Guests Count",
+          count1: "1 Guest",
+          count2: "2 Guests",
+          count3: "3 Guests",
+          count4: "4+ Family",
+          labelBlessing: "Heartfelt Blessing Message",
+          placeholderBlessing: "Write your warm wishes for R Girish & Supreetha...",
+          submitRsvp: "✨ Send Blessings & RSVP",
+          whatsappBtn: "Send via WhatsApp (+91 77605 42415)",
+          
+          wishesTitle: "Wishes & Blessings",
+          wishesSampleName: "Family & Well-wishers",
+          wishesSampleBadge: "Auspicious",
+          wishesSampleMsg: "\"Wishing R Girish & Supreetha a lifetime of happiness, togetherness, and divine blessings on your wedding day!\"",
+          
+          footerSub: "With Gratitude",
+          footerTitle: "Thank You",
+          footerDesc: "It is our greatest honor to celebrate our wedding with your divine presence and warm blessings.",
+          footerCouple: "R Girish & Supreetha",
+          footerVenue: "Lions Seva Mandhira, Thyagaraja Road, Koppa",
+          footerMadeWith: "Made with ❤️ for R Girish & Supreetha's Wedding",
+          rsvpAlert: "✨ Thank you! Your blessings and RSVP have been recorded."
+        },
+        kn: {
+          langBtn: "English",
+          introDivine: "ದಿವ್ಯ ಆಶೀರ್ವಾದಗಳೊಂದಿಗೆ",
+          introCouple: "ಆರ್. ಗಿರೀಶ್ & ಸುಪ್ರೀತಾ",
+          introTapText: "ಚಿನ್ನದ ಕಲ್ಯಾಣ ಮಂಟಪದ ಬಾಗಿಲುಗಳನ್ನು ತೆರೆಯಲು ಮಧ್ಯದ ಉಂಗುರವನ್ನು ಸ್ಪರ್ಶಿಸಿ",
+          introOpenBtn: "ಆಮಂತ್ರಣ ಪತ್ರಿಕೆ ತೆರೆಯಿರಿ",
+          
+          heroTheWeddingOf: "ಶುಭ ವಿವಾಹ",
+          heroGirish: "ಆರ್. ಗಿರೀಶ್",
+          heroSupreetha: "ಸುಪ್ರೀತಾ ಕೆ. ಎಸ್.",
+          heroVenue: "ಲಯನ್ಸ್ ಸೇವಾ ಮಂದಿರ, ತ್ಯಾಗರಾಜ ರಸ್ತೆ",
+          heroDate: "ಕೊಪ್ಪ • 10 ಡಿಸೆಂಬರ್ 2026",
+          heroMuhurtham: "ಶುಭ ಮುಹೂರ್ತ: ಬೆಳಗ್ಗೆ 8:45 ರಿಂದ 9:10",
+          heroScroll: "ವೀಕ್ಷಿಸಲು ಕೆಳಗೆ ಸ್ಕ್ರಾಲ್ ಮಾಡಿ",
+          
+          coupleSectionSub: "ನವಜೀವನದ ಶುಭಾರಂಭ",
+          coupleSectionTitle: "ವರ - ವಧು ಪರಿಚಯ",
+          groomTitle: "ವರ",
+          groomName: "ಆರ್. ಗಿರೀಶ್",
+          groomParents: "<strong>ಶ್ರೀ ಅರುಣ್ ಕುಮಾರ್</strong> ಹಾಗೂ <strong>ಶ್ರೀಮತಿ ಸುಶೀಲ</strong> ಅವರ ಸುಪುತ್ರ",
+          brideTitle: "ವಧು",
+          brideName: "ಸುಪ್ರೀತಾ ಕೆ. ಎಸ್.",
+          brideParents: "<strong>ಶ್ರೀ ಸುರೇಶ್ ಎಲ್.</strong> ಹಾಗೂ <strong>ಶ್ರೀಮತಿ ನಾಗರತ್ನ</strong> ಅವರ ಸುಪುತ್ರಿ",
+          
+          countdownSub: "ಶುಭ ದಿನದ ಕ್ಷಣಗಣನೆ",
+          countdownTitle: "ಮಾಂಗಲ್ಯ ಧಾರಣೆಯ ಶುಭ ಮುಹೂರ್ತಕ್ಕೆ",
+          countdownDate: "10 ಡಿಸೆಂಬರ್ 2026 • ಬೆಳಗ್ಗೆ 8:45 ರಿಂದ 9:10",
+          daysLabel: "ದಿನಗಳು",
+          hoursLabel: "ಗಂಟೆಗಳು",
+          minsLabel: "ನಿಮಿಷಗಳು",
+          secsLabel: "ಸೆಕೆಂಡುಗಳು",
+          
+          eventsSub: "ಪವಿತ್ರ ಕಲ್ಯಾಣ ಮಹೋತ್ಸವ",
+          eventsTitle: "ವಿವಾಹ ಮಹೋತ್ಸವ",
+          ceremonyBadge: "ಲಗ್ನ ಮುಹೂರ್ತ",
+          ceremonyDate: "ಗುರುವಾರ, 10 ಡಿಸೆಂಬರ್ 2026",
+          ceremonyHeading: "ಮಾಂಗಲ್ಯ ಧಾರಣೆ ಮುಹೂರ್ತ",
+          ceremonyTime: "ಬೆಳಗ್ಗೆ 8:45 ರಿಂದ 9:10 ರವರೆಗೆ",
+          ceremonyDesc: "ನಮ್ಮ ವಿವಾಹ ಮಹೋತ್ಸವದ ಶುಭ ಸಂದರ್ಭಕ್ಕೆ ತಾವುಗಳು ಸಕುಟುಂಬ ಸಮೇತರಾಗಿ ಆಗಮಿಸಿ, ನವ ವಧು-ವರರಿಗೆ ಪ್ರೀತಿಯ ಶುಭ ಹಾರೈಕೆ ಹಾಗೂ ಆಶೀರ್ವಾದಗಳನ್ನು ನೀಡಬೇಕಾಗಿ ವಿನಮ್ರ ಪೂರ್ವಕವಾಗಿ ಪ್ರಾರ್ಥಿಸುತ್ತೇವೆ.",
+          venueLabel: "ಸ್ಥಳ",
+          venueName: "ಲಯನ್ಸ್ ಸೇವಾ ಮಂದಿರ",
+          venueAddress: "ತ್ಯಾಗರಾಜ ರಸ್ತೆ, ಕೊಪ್ಪ",
+          mapsBtn: "ಗೂಗಲ್ ಮ್ಯಾಪ್‌ನಲ್ಲಿ ಸ್ಥಳ ವೀಕ್ಷಿಸಿ",
+          
+          galleryTitle: "ನಮ್ಮ ಪ್ರೀತಿಯ ಕ್ಷಣಗಳು",
+          
+          registrySub: "ಆಶೀರ್ವಾದ & ಹಾರೈಕೆಗಳು",
+          registryTitle: "ಆತ್ಮೀಯ ಹಾರೈಕೆಗಳೊಂದಿಗೆ",
+          registryDesc: "ಈ ಶುಭ ದಿನದಂದು ನಿಮ್ಮ ಸಕುಟುಂಬ ಉಪಸ್ಥಿತಿ ಹಾಗೂ ಹೃತ್ಪೂರ್ವಕ ಆಶೀರ್ವಾದಗಳೇ ನಮಗೆ ಮತ್ತು ನಮ್ಮ ಕುಟುಂಬಕ್ಕೆ ಅತ್ಯಂತ ದೊಡ್ಡ ಉಡುಗೊರೆ.",
+          
+          rsvpSub: "ನಿಮ್ಮ ಆಗಮನವೇ ನಮಗೆ ಆಶೀರ್ವಾದ",
+          rsvpTitle: "ಆಗಮನ ದೃಢೀಕರಣ & ಹಾರೈಕೆ",
+          rsvpContact: "ಸಂಪರ್ಕ: +91 77605 42415",
+          labelName: "ನಿಮ್ಮ ಪೂರ್ಣ ಹೆಸರು",
+          placeholderName: "ಉದಾ: ರಮೇಶ್ ಮತ್ತು ಕುಟುಂಬ",
+          labelPhone: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
+          placeholderPhone: "+91 98765 43210",
+          labelAttend: "ತಾವು ಆಗಮಿಸುವಿರಾ?",
+          attendYes: "ಖಂಡಿತವಾಗಿಯೂ ಆಗಮಿಸುತ್ತೇವೆ",
+          attendNo: "ಕಾರಣಾಂತರಗಳಿಂದ ಬರಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ",
+          labelCount: "ಅತಿಥಿಗಳ ಸಂಖ್ಯೆ",
+          count1: "1 ಜನ",
+          count2: "2 ಜನ",
+          count3: "3 ಜನ",
+          count4: "4+ ಕುಟುಂಬ ಸದಸ್ಯರು",
+          labelBlessing: "ಹಾರೈಕೆ ಮತ್ತು ಸಂದೇಶ",
+          placeholderBlessing: "ಆರ್. ಆರ್. ಗಿರೀಶ್ ಮತ್ತು ಸುಪ್ರೀತಾ ಅವರಿಗೆ ನಿಮ್ಮ ಹಾರೈಕೆಯನ್ನು ಬರೆಯಿರಿ...",
+          submitRsvp: "✨ ಆಶೀರ್ವಾದ & RSVP ಕಳುಹಿಸಿ",
+          whatsappBtn: "ವಾಟ್ಸಾಪ್ ಮೂಲಕ ಕಳುಹಿಸಿ (+91 77605 42415)",
+          
+          wishesTitle: "ಆಶೀರ್ವಾದ ಮತ್ತು ಹಾರೈಕೆಗಳು",
+          wishesSampleName: "ಕುಟುಂಬ & ಹಿತೈಷಿಗಳು",
+          wishesSampleBadge: "ಮಂಗಳಕರ",
+          wishesSampleMsg: "\"ಆರ್. ಗಿರೀಶ್ ಮತ್ತು ಸುಪ್ರೀತಾ ದಂಪತಿಗಳಿಗೆ ನೂರ್ಕಾಲ ಸುಖ, ಸಂತೋಷ ಮತ್ತು ಸಮೃದ್ಧಿಯ ದಾಂಪತ್ಯ ಜೀವನ ಲಭಿಸಲೆಂದು ಹೃತ್ಪೂರ್ವಕವಾಗಿ ಹಾರೈಸುತ್ತೇವೆ!\"",
+          
+          footerSub: "ಧನ್ಯವಾದಗಳೊಂದಿಗೆ",
+          footerTitle: "ಧನ್ಯವಾದಗಳು",
+          footerDesc: "ನಿಮ್ಮ ಅಮೂಲ್ಯವಾದ ಉಪಸ್ಥಿತಿ ಮತ್ತು ದಿವ್ಯ ಆಶೀರ್ವಾದಗಳೊಂದಿಗೆ ನಮ್ಮ ಮದುವೆಯನ್ನು ಆಚರಿಸುವುದು ನಮಗೆ ಸಂದ ಗೌರವ.",
+          footerCouple: "ಆರ್. ಗಿರೀಶ್ ಮತ್ತು ಸುಪ್ರೀತಾ",
+          footerVenue: "ಲಯನ್ಸ್ ಸೇವಾ ಮಂದಿರ, ತ್ಯಾಗರಾಜ ರಸ್ತೆ, ಕೊಪ್ಪ",
+          footerMadeWith: "ಆರ್. ಗಿರೀಶ್ ಮತ್ತು ಸುಪ್ರೀತಾ ಅವರ ವಿವಾಹಕ್ಕಾಗಿ ಪ್ರೀತಿಯಿಂದ ರಚಿಸಲಾಗಿದೆ ❤️",
+          rsvpAlert: "✨ ಧನ್ಯವಾದಗಳು! ನಿಮ್ಮ ಆಶೀರ್ವಾದ ಮತ್ತು ಆಗಮನ ದೃಢೀಕರಣವನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ."
+        }
+      };
+
+      let currentLang = localStorage.getItem("wedding_lang") || "en";
+
+      function applyLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem("wedding_lang", lang);
+        const t = translations[lang];
+
+        if (lang === "kn") {
+          document.body.classList.add("lang-kn");
+        } else {
+          document.body.classList.remove("lang-kn");
+        }
+
+        // 1. Text elements with data-i18n
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+          const key = el.getAttribute("data-i18n");
+          if (t[key] !== undefined) {
+            el.innerText = t[key];
+          }
+        });
+
+        // 2. HTML elements with data-i18n-html
+        document.querySelectorAll("[data-i18n-html]").forEach(el => {
+          const key = el.getAttribute("data-i18n-html");
+          if (t[key] !== undefined) {
+            el.innerHTML = t[key];
+          }
+        });
+
+        // 3. Input placeholders
+        const nameInput = document.getElementById("guestName");
+        const blessingInput = document.getElementById("guestBlessing");
+        if (nameInput) nameInput.placeholder = t.placeholderName;
+        if (blessingInput) blessingInput.placeholder = t.placeholderBlessing;
+
+        // 4. Toggle button text
+        const langBtnText = document.getElementById("langBtnText");
+        if (langBtnText) langBtnText.innerText = t.langBtn;
+      }
+
+      // Language Switch Button Click Handler
+      const langToggleBtn = document.getElementById("langToggleBtn");
+      if (langToggleBtn) {
+        langToggleBtn.addEventListener("click", function(e) {
+          e.stopPropagation();
+          const nextLang = currentLang === "en" ? "kn" : "en";
+          applyLanguage(nextLang);
+        });
+      }
+
+      // Initialize selected language
+      applyLanguage(currentLang);
+
+
+      // 1. CINEMATIC TEMPLE DOORS INTRO ANIMATION
+      const introOverlay = document.getElementById("introOverlay");
+      const introVideo = document.getElementById("introVideo");
+      const introCenterUI = document.getElementById("introCenterUI");
+      const introVignette = document.getElementById("introVignette");
+      const openBtn = document.getElementById("openBtn");
+      const bgAudio = document.getElementById("bgAudio");
+      const musicToggleBtn = document.getElementById("musicToggleBtn");
+      const musicIconPlaying = document.getElementById("musicIconPlaying");
+      const musicIconPaused = document.getElementById("musicIconPaused");
+      const particleContainer = document.getElementById("particleContainer");
+
+      let isMusicPlaying = false;
+      let isOpened = false;
+
+      function openInvitation() {
+        if (isOpened) return;
+        isOpened = true;
+
+        if (introCenterUI) {
+          introCenterUI.style.opacity = "0";
+          introCenterUI.style.transform = "scale(0.92)";
+          introCenterUI.style.pointerEvents = "none";
+        }
+        if (introVignette) {
+          introVignette.style.opacity = "0.2";
+        }
+
+        if (introVideo) {
+          introVideo.currentTime = 0;
+          const playPromise = introVideo.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(err => {
+              console.warn("Video play error:", err);
+              finishIntro();
+            });
+          }
+        }
+
+        bgAudio.volume = 0.5;
+        bgAudio.play().then(() => {
+          isMusicPlaying = true;
+          updateMusicButton();
+        }).catch(err => {
+          console.log("Audio play postponed:", err);
+        });
+
+        function finishIntro() {
+          if (introOverlay.classList.contains("hidden-intro")) return;
+          introOverlay.style.transition = "opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1)";
+          introOverlay.style.opacity = "0";
+          setTimeout(() => {
+            introOverlay.classList.add("hidden-intro");
+            startPetalEffect();
+          }, 800);
+        }
+
+        if (introVideo) {
+          introVideo.addEventListener("timeupdate", function() {
+            if (introVideo.duration && (introVideo.duration - introVideo.currentTime < 0.6)) {
+              finishIntro();
+            }
+          });
+          introVideo.addEventListener("ended", finishIntro);
+        }
+
+        setTimeout(finishIntro, 3800);
+      }
+
+      openBtn.addEventListener("click", openInvitation);
+      introOverlay.addEventListener("click", openInvitation);
+
+
+      // 2. MUSIC TOGGLE CONTROLLER
+      function updateMusicButton() {
+        if (isMusicPlaying) {
+          musicIconPlaying.classList.remove("hidden");
+          musicIconPaused.classList.add("hidden");
+          document.querySelector(".pulse-ring-1").style.display = "block";
+          document.querySelector(".pulse-ring-2").style.display = "block";
+        } else {
+          musicIconPlaying.classList.add("hidden");
+          musicIconPaused.classList.remove("hidden");
+          document.querySelector(".pulse-ring-1").style.display = "none";
+          document.querySelector(".pulse-ring-2").style.display = "none";
+        }
+      }
+
+      musicToggleBtn.addEventListener("click", function(e) {
+        e.stopPropagation();
+        if (isMusicPlaying) {
+          bgAudio.pause();
+          isMusicPlaying = false;
+        } else {
+          bgAudio.play().then(() => {
+            isMusicPlaying = true;
+          });
+        }
+        updateMusicButton();
+      });
+
+      document.addEventListener("visibilitychange", function() {
+        if (document.hidden && isMusicPlaying) {
+          bgAudio.pause();
+        } else if (!document.hidden && isMusicPlaying) {
+          bgAudio.play();
+        }
+      });
+
+
+      // 3. LIVE COUNTDOWN TIMER (10th December 2026 at 08:45 AM)
+      const targetDate = new Date("2026-12-10T08:45:00+05:30");
+      const weddingTimestamp = targetDate.getTime();
+
+      function updateCountdown() {
+        const now = Date.now();
+        const diff = weddingTimestamp - now;
+
+        if (diff > 0) {
+          const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+          const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+          const daysEl = document.getElementById("days");
+          const hoursEl = document.getElementById("hours");
+          const minsEl = document.getElementById("minutes");
+          const secsEl = document.getElementById("seconds");
+
+          if (daysEl) daysEl.innerText = String(d).padStart(2, '0');
+          if (hoursEl) hoursEl.innerText = String(h).padStart(2, '0');
+          if (minsEl) minsEl.innerText = String(m).padStart(2, '0');
+          if (secsEl) secsEl.innerText = String(s).padStart(2, '0');
+        } else {
+          document.getElementById("days").innerText = "00";
+          document.getElementById("hours").innerText = "00";
+          document.getElementById("minutes").innerText = "00";
+          document.getElementById("seconds").innerText = "00";
+        }
+      }
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+
+
+      // 4. FLOATING PETALS / SPARKLES GENERATOR
+      function startPetalEffect() {
+        const colors = ['#dfba73', '#c9953a', '#f5d6a0', '#e35d6a', '#ffffff'];
+        for (let i = 0; i < 25; i++) {
+          createParticle(colors);
+        }
+        setInterval(() => {
+          if (particleContainer.childElementCount < 25) {
+            createParticle(colors);
+          }
+        }, 1200);
+      }
+
+      function createParticle(colors) {
+        const p = document.createElement("div");
+        p.classList.add("particle");
+        
+        const size = Math.random() * 8 + 4;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const left = Math.random() * 100;
+        const duration = Math.random() * 6 + 7;
+        const delay = Math.random() * 4;
+
+        p.style.width = size + "px";
+        p.style.height = (size * 1.4) + "px";
+        p.style.backgroundColor = color;
+        p.style.borderRadius = "50% 0 50% 50%";
+        p.style.left = left + "%";
+        p.style.top = "-20px";
+        p.style.opacity = Math.random() * 0.7 + 0.3;
+        p.style.animation = `fall ${duration}s linear ${delay}s infinite`;
+
+        particleContainer.appendChild(p);
+
+        setTimeout(() => {
+          p.remove();
+        }, (duration + delay) * 1000);
+      }
+
+
+      // 5. RSVP & WHATSAPP INTEGRATION (+91 77605 42415)
+      const rsvpForm = document.getElementById("rsvpForm");
+      const whatsappBtn = document.getElementById("whatsappRsvpBtn");
+      const targetWhatsAppNumber = "917760542415";
+
+      function getRsvpMessage() {
+        const name = document.getElementById("guestName").value.trim() || (currentLang === "kn" ? "ಅತಿಥಿಗಳು" : "Guest");
+        const phone = document.getElementById("guestPhone").value.trim() || "-";
+        const att = document.getElementById("attendance").value;
+        const count = document.getElementById("guestCount").value;
+        const blessing = document.getElementById("guestBlessing").value.trim() || 
+          (currentLang === "kn" ? "ಹೃತ್ಪೂರ್ವಕ ಶುಭಾಶಯಗಳು ಮತ್ತು ಆಶೀರ್ವಾದಗಳು!" : "Heartiest congratulations on your wedding!");
+
+        if (currentLang === "kn") {
+          return `ನಮಸ್ಕಾರ ಆರ್. ಗಿರೀಶ್ ಮತ್ತು ಸುಪ್ರೀತಾ! 🌸\n\n*ವಿವಾಹ ಆಗಮನ ದೃಢೀಕರಣ (RSVP)*\n👤 *ಹೆಸರು:* ${name}\n📞 *ಮೊಬೈಲ್:* ${phone}\n✨ *ಆಗಮನ:* ${att}\n👥 *ಸದಸ್ಯರ ಸಂಖ್ಯೆ:* ${count}\n\n💌 *ಹಾರೈಕೆಗಳು:* "${blessing}"\n\nಶುಭ ಹಾರೈಕೆಗಳು! 10 ಡಿಸೆಂಬರ್ 2026 ರಂದು ಕೊಪ್ಪದ ಲಯನ್ಸ್ ಸೇವಾ ಮಂದಿರದಲ್ಲಿ ನಡೆಯುವ ನಿಮ್ಮ ವಿವಾಹ ಮಹೋತ್ಸವದಲ್ಲಿ ಭಾಗವಹಿಸಲು ಸಂತೋಷಪಡುತ್ತೇವೆ.`;
+        }
+
+        return `Namaskara R Girish & Supreetha! 🌸\n\n*Wedding RSVP Confirmation*\n👤 *Name:* ${name}\n📞 *Phone:* ${phone}\n✨ *Attendance:* ${att}\n👥 *Number of Guests:* ${count}\n\n💌 *Wishes & Blessings:* "${blessing}"\n\nHeartiest Congratulations! Looking forward to your wedding on 10th December 2026 at Lions Seva Mandhira, Koppa.`;
+      }
+
+      whatsappBtn.addEventListener("click", function() {
+        const msg = encodeURIComponent(getRsvpMessage());
+        window.open(`https://api.whatsapp.com/send?phone=${targetWhatsAppNumber}&text=${msg}`, '_blank');
+      });
+
+      rsvpForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const name = document.getElementById("guestName").value.trim();
+        const blessing = document.getElementById("guestBlessing").value.trim();
+
+        if (blessing) {
+          const card = document.createElement("div");
+          card.className = "p-4 rounded-2xl bg-white border border-[#ebd8c3] text-left shadow-sm";
+          card.innerHTML = `
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="font-bold text-xs text-[#52381b]">${name}</span>
+              <span class="text-[9px] uppercase font-bold text-[#c9953a] tracking-wider">${currentLang === "kn" ? "ಈಗಷ್ಟೇ" : "Just Now"}</span>
+            </div>
+            <p class="text-xs text-[#8a7156] italic pl-2.5 border-l-2 border-[#c9953a]">
+              "${blessing}"
+            </p>
+          `;
+          document.getElementById("blessingsWall").prepend(card);
+        }
+
+        alert(translations[currentLang].rsvpAlert);
+        rsvpForm.reset();
+      });
+
+
+      // 6. OUR LOVE GALLERY CAROUSEL CONTROLLER
+      const galleryPhotos = [
+        "assets/gallery/photo1.jpg",
+        "assets/gallery/photo2.jpg",
+        "assets/gallery/photo3.jpg",
+        "assets/gallery/photo4.jpg",
+        "assets/gallery/photo5.jpg",
+        "assets/gallery/photo6.jpg"
+      ];
+      let currentGalleryIndex = 0;
+      const galleryImg = document.getElementById("galleryImage");
+      const galleryPrev = document.getElementById("galleryPrevBtn");
+      const galleryNext = document.getElementById("galleryNextBtn");
+      const galleryDots = document.getElementById("galleryDots");
+
+      function updateGallery() {
+        if (!galleryImg) return;
+        galleryImg.style.opacity = "0.5";
+        galleryImg.src = galleryPhotos[currentGalleryIndex];
+        setTimeout(() => { galleryImg.style.opacity = "1"; }, 150);
+
+        if (galleryDots) {
+          galleryDots.innerHTML = "";
+          galleryPhotos.forEach((_, idx) => {
+            const dot = document.createElement("button");
+            dot.setAttribute("aria-label", `Slide ${idx + 1}`);
+            dot.className = idx === currentGalleryIndex 
+              ? "w-6 h-2 rounded-full bg-[#c9953a] transition-all cursor-pointer" 
+              : "w-2 h-2 rounded-full bg-[#ebd8c3] hover:bg-[#c9953a]/60 transition-all cursor-pointer";
+            dot.addEventListener("click", () => {
+              currentGalleryIndex = idx;
+              updateGallery();
+            });
+            galleryDots.appendChild(dot);
+          });
+        }
+      }
+
+      if (galleryPrev && galleryNext) {
+        galleryPrev.addEventListener("click", () => {
+          currentGalleryIndex = (currentGalleryIndex - 1 + galleryPhotos.length) % galleryPhotos.length;
+          updateGallery();
+        });
+        galleryNext.addEventListener("click", () => {
+          currentGalleryIndex = (currentGalleryIndex + 1) % galleryPhotos.length;
+          updateGallery();
+        });
+
+        // Touch swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const galleryCard = galleryImg.parentElement;
+        if (galleryCard) {
+          galleryCard.addEventListener("touchstart", e => {
+            touchStartX = e.changedTouches[0].screenX;
+          }, { passive: true });
+          galleryCard.addEventListener("touchend", e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 45) {
+              currentGalleryIndex = (currentGalleryIndex + 1) % galleryPhotos.length;
+              updateGallery();
+            } else if (touchEndX - touchStartX > 45) {
+              currentGalleryIndex = (currentGalleryIndex - 1 + galleryPhotos.length) % galleryPhotos.length;
+              updateGallery();
+            }
+          }, { passive: true });
+        }
+
+        updateGallery();
+      }
+
+    });
+  </script>
+</body>
+</html>
