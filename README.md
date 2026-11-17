@@ -6,7 +6,7 @@ An exact, high-fidelity replica of the **Divine Temple Cinematic Wedding Invitat
 
 ## 📋 Customized Details
 
-- **Groom**: Girish (Son of Mr. Arun Kumar & Mrs. Sushila)
+- **Groom**: Girish (Son of Late Arun Kumar & Mrs. Sushila)
 - **Bride**: Supritha K S (Daughter of Mr. Suresh L & Mrs. Nagarathna)
 - **Wedding Date**: 10th December 2026
 - **Muhurtham Time**: 8:45 AM to 9:10 AM
